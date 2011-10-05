@@ -1,0 +1,8 @@
+- if contents.length
+	%ul.contents
+		- contents.each do |file|
+			%li
+				%a{:href => file[:url], :rel => file[:rel]}
+					= file[:name]
+- else
+	.error Empty directory!
