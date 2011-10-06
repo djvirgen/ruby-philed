@@ -22,35 +22,60 @@ get '/*' do |path|
   end
   
   if (File.directory?(@abs_path)) then
-    # Show directory contents
-    contents = []
-    Dir.foreach(@abs_path) do |x|
-      # Skip current directory
-      next if (x == '.')
-    
-      # Skip parent directory if at top
-      next if (x == '..' && @abs_path == @media_path)
-    
-      if (x == '..') then
-        contents << {
-          :url => '/' + File.dirname(path).gsub(/^\.$/, ''),
-          :abs_path => File.basename(@abs_path),
-          :name => '.. Parent directory',
-          :rel => 'parent'
-        }
-      else
-        abs_path = "#{@abs_path}/#{x}"
-        contents << {
-          :url => "/" + "#{path}/#{x}".gsub(/^\/*/, ''),
-          :abs_path => abs_path,
-          :name => File.basename(abs_path),
-          :rel => (File.directory?("#{@abs_path}/#{x}") ? 'directory' : 'file')
-        }
-      end
-    end
-
-    haml :directory, :locals => {:contents => contents}
+    haml :directory, :locals => {:contents => contents(path), :path => path}
   else
     send_file @abs_path
   end
+end
+
+def contents(path)
+  contents = []
+  
+  Dir.foreach(@abs_path) do |x|
+    # Skip current directory
+    next if (x == '.')
+  
+    # Skip parent directory if at top
+    next if (x == '..' && @abs_path == @media_path)
+  
+    if (x == '..') then
+      contents << {
+        :url => '/' + File.dirname(path).gsub(/^\.$/, ''),
+        :abs_path => File.basename(@abs_path),
+        :name => '.. Parent directory',
+        :rel => 'parent',
+        :info => 'directory'
+      }
+    elsif (File.directory?("#{@abs_path}/#{x}")) then
+      abs_path = "#{@abs_path}/#{x}"
+      contents << {
+        :url => "/" + "#{path}/#{x}".gsub(/^\/*/, ''),
+        :abs_path => abs_path,
+        :name => File.basename(abs_path),
+        :rel => 'directory',
+        :info => 'directory'
+      }
+    else
+      abs_path = "#{@abs_path}/#{x}"
+      contents << {
+        :url => "/" + "#{path}/#{x}".gsub(/^\/*/, ''),
+        :abs_path => abs_path,
+        :name => File.basename(abs_path),
+        :rel => 'file',
+        :info => "#{File.size(abs_path)} bytes"
+      }
+    end
+  end
+  
+  contents = contents.sort! do |x, y|
+    if (x[:rel] == y[:rel]) then
+      x[:name] <=> y[:name]
+    elsif (x[:rel] == 'parent')
+      -1
+    else
+      x[:rel] == 'directory' ? -1 : 1
+    end
+  end
+  
+  return contents
 end

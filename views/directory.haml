@@ -1,8 +1,10 @@
+.path Current path: /#{path}
 - if contents.length
 	%ul.contents
 		- contents.each do |file|
 			%li
 				%a{:href => file[:url], :rel => file[:rel]}
-					= file[:name]
+					.filename= file[:name]
+					.details= file[:info]
 - else
 	.error Empty directory!

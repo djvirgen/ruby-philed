@@ -1,0 +1,68 @@
+body{
+  background: #12171d;
+  color: #ccc;
+  padding-bottom: 20px;
+}
+
+header{
+  padding: 10px 0;
+}
+
+header .title{
+  font-size: 48px;
+}
+
+header .slogan{
+  font-size: 16px;
+  font-style: italic;
+  color: #777;
+}
+
+footer{
+  font-size: 14px;
+  padding: 10px 0;
+}
+
+.path{
+  font-size: 24px;
+}
+
+ul.contents,
+ul.contents li{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.contents{
+  margin: 10px 0;
+}
+
+ul.contents li a{
+  display: block;
+  padding: 8px 20px 18px 80px;
+  font-size: 24px;
+  border-radius: 20px;
+  text-decoration: none;
+}
+
+ul.contents li a .details{
+  font-size: 12px;
+}
+
+ul.contents li a[rel=parent]{
+  background: url('/images/icons/arrowup.png') 20px 12px no-repeat transparent;
+}
+
+ul.contents li a[rel=directory]{
+  background: url('/images/icons/folder.png') 20px 12px no-repeat transparent;
+}
+
+ul.contents li a[rel=file]{
+  background: url('/images/icons/page.png') 20px 12px no-repeat transparent;
+}
+
+ul.contents li a:hover{
+  background-color: #242c34;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+}
