@@ -6,7 +6,7 @@ before do
   @media_path = File.expand_path(File.dirname(__FILE__) + '/media')
   
   # No editing!
-  request.path_info = request.path_info.gsub(/\/+$/, '')
+  request.path_info = request.path_info.gsub(/\/+$/, '') # remove trailing slash
   @abs_path = "#{@media_path}#{request.path_info}"
 end
 
@@ -62,7 +62,7 @@ def contents(path)
         :abs_path => abs_path,
         :name => File.basename(abs_path),
         :rel => 'file',
-        :info => "#{File.size(abs_path)} bytes"
+        :info => file_size(abs_path)
       }
     end
   end
@@ -78,4 +78,16 @@ def contents(path)
   end
   
   return contents
+end
+
+def file_size(path)
+  size = File.size(path)
+  
+  if (size > 1_000_000) then
+    "#{size / 1_000_000} MB"
+  elsif (size > 1_000) then
+    "#{size / 1_000} KB"
+  else
+    "#{size} B"
+  end
 end
