@@ -1,5 +1,6 @@
-require File.dirname(__FILE__) + '/vendor/rack/lib/rack'
-require File.dirname(__FILE__) + '/vendor/sinatra/lib/sinatra'
+require File.dirname(__FILE__) + '/vendor/rack/lib/rack/'
+require File.dirname(__FILE__) + '/vendor/sinatra/lib/sinatra/'
+require 'rubygems'
 
 set :run, false
 set :environment, :production
