@@ -1,5 +1,3 @@
-require File.dirname(__FILE__) + '/vendor/sinatra/lib/sinatra/'
-
 # Before filter
 before do
   # Configuration
