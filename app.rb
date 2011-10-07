@@ -70,7 +70,7 @@ def contents(path)
   end
   
   contents = contents.sort! do |x, y|
-    eif (x[:rel] == 'parent') then
+    if (x[:rel] == 'parent') then
       -1
     elsif (x[:rel] == y[:rel])
       x[:name] <=> y[:name]
