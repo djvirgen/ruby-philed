@@ -9,7 +9,7 @@ set :application, 'media'
 
 # the rest should be good
 set :repository,
-    "#{user}@#{domain}:git/#{application}.git"
+    "#{user}@#{domain}:git/ruby-philed.git"
 set :deploy_to,
     "/home/#{user}/sites/ruby/#{application}.#{domain}"
 set :deploy_via, :remote_cache
