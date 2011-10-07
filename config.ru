@@ -1,7 +1,7 @@
-require 'vendor/rack/lib/rack'
-require 'vendor/sinatra/lib/sinatra'
+require File.dirname(__FILE__) + '/vendor/rack/lib/rack'
+require File.dirname(__FILE__) + '/vendor/sinatra/lib/sinatra'
 
-set :run, false
+set :run, true
 set :environment, :production
 set :views, "views"
 
