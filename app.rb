@@ -35,6 +35,10 @@ def contents(path)
   
     # Skip parent directory if at top
     next if (x == '..' && @abs_path == @media_path)
+    
+    # Skip .placeholder
+    next if (x == '.placeholder')
+    
   
     if (x == '..') then
       contents << {

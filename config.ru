@@ -1,4 +1,5 @@
 require 'vendor/rack/lib/rack'
+require 'vendor/haml/lib/haml'
 require 'vendor/sinatra/lib/sinatra'
 require 'rubygems'
 
