@@ -22,8 +22,11 @@ set :use_sudo, false
 server domain, :app, :web
 
 namespace :deploy do
-  run "ln -s ~/media/music #{current_path}/media/music"
   task :restart do
     run "touch #{current_path}/tmp/restart.txt" 
   end
+end
+
+namespace :populate do
+  run "ln -s /home/#{user}/media/music #{current_path}/media/music"
 end
