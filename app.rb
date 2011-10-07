@@ -70,10 +70,10 @@ def contents(path)
   end
   
   contents = contents.sort! do |x, y|
-    if (x[:rel] == y[:rel]) then
-      x[:name] <=> y[:name]
-    elsif (x[:rel] == 'parent')
+    eif (x[:rel] == 'parent') then
       -1
+    elsif (x[:rel] == y[:rel])
+      x[:name] <=> y[:name]
     else
       x[:rel] == 'directory' ? -1 : 1
     end
